@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 
 # Create your views here.
 layout = """
@@ -19,6 +19,9 @@ layout = """
             </div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/inicio">Inicio</a>
+            </nav>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/primos">Primos</a>
             </nav>
 """
 
@@ -45,3 +48,31 @@ def index(request):
         </div>
     """
     return HttpResponse(layout + mensaje + footer)
+
+def es_primo(num):
+    """ Función auxiliar para verificar si un número es primo """
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def primos(request, a=0, b=100):
+    if a>b:
+        return redirect('primos',a=b, b=a)
+    resultado = f"""
+        <h2> Números de [{a},{b}] </h2> 
+    """
+    
+    a = int(a)  # Convertir a y b a enteros, ya que vienen desde request
+    b = int(b)
+    
+    while a <= b:
+        if es_primo(a):
+            resultado += f"<li> {a} </li>"
+        a += 1
+    
+    resultado += "</ul>"
+    return HttpResponse(layout + resultado + footer)
+
