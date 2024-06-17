@@ -23,6 +23,9 @@ layout = """
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/primos">Primos</a>
             </nav>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/examen">Examen</a>
+            </nav>
 """
 
 footer = """
@@ -75,4 +78,22 @@ def primos(request, a=0, b=100):
     
     resultado += "</ul>"
     return HttpResponse(layout + resultado + footer)
+    
+def examen(request):
+    mensaje="""
+            <div>
+            <h2 class="text-primary">GitHub del Proyecto</h2>
+            <ul class="team-list">
+                <li>Dafne Ayelen Huertas Gonzales</li>
+                <li>Git Hub: https://github.com/xdafnex/-UC3_Parte01.git</li>
+                <li>Arian Erick Sevillano Colina</li>
+                <li>Git Hub: https://github.com/ariansevillano/UC3-Parte02.git</li>
+                <li>Diego Jheremy Caballero Villazana</li>
+                <li>Git Hub: https://github.com/DiegoCaballeroo/UC3-Parte03.git  </li>
+                <li>Andre Rafael Fernandez Huaman</li>
+                <li>Git Hub:https://github.com/andrefh2101/UC3-Parte04-.git </li>
+            </ul>
+        </div>
+    """
+    return HttpResponse(layout + mensaje + footer)
 
